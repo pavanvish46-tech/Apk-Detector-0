@@ -1,23 +1,26 @@
 const express = require("express");
-const multer = require("multer");
 const path = require("path");
+const multer = require("multer");
 
 const app = express();
+const PORT = process.env.PORT || 10000; // Render ke liye dynamic port
+
+// Static files (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, "public")));
+
+// Multer setup (agar file upload hai)
 const upload = multer({ dest: "uploads/" });
 
-app.use(express.static(path.join(__dirname)));
-
-app.post("/scan", upload.single("apk"), (req, res) => {
-  // Dummy scan logic
-  let risk = Math.floor(Math.random() * 100);
-  res.json({
-    file: req.file.originalname,
-    risk: risk,
-    issues: risk > 70 ? ["Suspicious permissions", "Possible banking fraud"] :
-           risk > 40 ? ["Some unusual behavior detected"] :
-           ["Safe APK"]
-  });
+// Example API
+app.post("/upload", upload.single("file"), (req, res) => {
+  res.json({ message: "File uploaded successfully", file: req.file });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+// Root route (homepage serve karega)
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
