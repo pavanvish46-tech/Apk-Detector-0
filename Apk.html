@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fake Banking APK Detector 🚀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Quantum Sentinel 🔐</h1>
+      <button id="loginBtn">Login</button>
+      <button id="profileBtn" style="display:none;">Profile</button>
+    </header>
+
+    <main>
+      <h2>Upload APK to Scan</h2>
+      <div class="upload-box" id="dropZone">
+        <input type="file" id="apkFile" accept=".apk">
+        <p>Drag & Drop or Click to Upload</p>
+      </div>
+
+      <button id="scanBtn">Scan Now</button>
+
+      <div id="resultBox" class="hidden">
+        <h3>Scan Result</h3>
+        <p id="percentage"></p>
+        <progress id="progressBar" max="100" value="0"></progress>
+        <ul id="issues"></ul>
+      </div>
+    </main>
+  </div>
+
+  <canvas id="bgCanvas"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>
