@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: fake-banking-apk-detector
+    name: apk-detector
     env: node
     buildCommand: "npm install"
     startCommand: "npm start"
