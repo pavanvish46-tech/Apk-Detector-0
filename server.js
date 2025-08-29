@@ -13,26 +13,24 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 const SECRET = process.env.JWT_SECRET || "supersecretkey";
 
-// ✅ Middleware
+// Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, "public"))); // safer
 
-// ✅ MongoDB connection (Atlas ka URL Render ke Environment Variables me daalna hoga)
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log("✅ MongoDB Connected"))
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Connected"))
   .catch(err => console.error("❌ MongoDB Error:", err));
 
-// ✅ User Schema
+// User Schema
 const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String
 });
 const User = mongoose.model("User", UserSchema);
 
-// ✅ Register
+// Register
 app.post("/api/register", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -49,7 +47,7 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
-// ✅ Login
+// Login
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -66,11 +64,9 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// ✅ Serve main page
+// Serve main page
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "apk.html"));
+  res.sendFile(path.join(__dirname, "public", "apk.html")); // keep apk.html in /public
 });
 
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-
-
