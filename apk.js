@@ -49,3 +49,34 @@ function animateStars() {
   requestAnimationFrame(animateStars);
 }
 animateStars();
+async function registerUser() {
+  const email = document.getElementById("regEmail").value;
+  const password = document.getElementById("regPass").value;
+
+  const res = await fetch("/api/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+  const data = await res.json();
+  alert(data.message || "Registered!");
+}
+
+async function loginUser() {
+  const email = document.getElementById("logEmail").value;
+  const password = document.getElementById("logPass").value;
+
+  const res = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+  const data = await res.json();
+
+  if (data.success) {
+    localStorage.setItem("token", data.token);
+    alert("Login Successful!");
+  } else {
+    alert(data.message || "Login failed");
+  }
+}
