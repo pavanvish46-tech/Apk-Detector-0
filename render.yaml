@@ -5,7 +5,8 @@ services:
     buildCommand: "npm install"
     startCommand: "npm start"
     plan: free
-    region: oregon
     envVars:
-      - key: NODE_VERSION
-        value: 18
+      - key: MONGO_URI
+        value: "mongodb+srv://<username>:<password>@cluster0.mongodb.net/apkdetector"
+      - key: JWT_SECRET
+        value: "mysecretkey123"
