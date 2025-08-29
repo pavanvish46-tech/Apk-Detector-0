@@ -12,7 +12,6 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 10000;
 const SECRET = process.env.JWT_SECRET || "supersecretkey";
-const mongoose = require("mongoose");
 
 // ✅ Middleware
 app.use(cors());
