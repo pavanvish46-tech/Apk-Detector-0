@@ -2,36 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Fake Banking APK Detector 🚀</title>
+  <title>Fake Banking APK Detector</title>
   <link rel="stylesheet" href="apk.css">
+  <script defer src="apk.js"></script>
 </head>
 <body>
+  <h2>🚀 Fake Banking APK Detector</h2>
+
   <div class="container">
-    <header>
-      <h1>Quantum Sentinel 🔐</h1>
-      <button id="loginBtn">Login</button>
-      <button id="profileBtn" style="display:none;">Profile</button>
-    </header>
-
-    <main>
-      <h2>Upload APK to Scan</h2>
-      <div class="upload-box" id="dropZone">
-        <input type="file" id="apkFile" accept=".apk">
-        <p>Drag & Drop or Click to Upload</p>
-      </div>
-
-      <button id="scanBtn">Scan Now</button>
-
-      <div id="resultBox" class="hidden">
-        <h3>Scan Result</h3>
-        <p id="percentage"></p>
-        <progress id="progressBar" max="100" value="0"></progress>
-        <ul id="issues"></ul>
-      </div>
-    </main>
+    <h3>Register</h3>
+    <input type="email" id="regEmail" placeholder="Email">
+    <input type="password" id="regPass" placeholder="Password">
+    <button onclick="registerUser()">Register</button>
   </div>
 
-  <canvas id="bgCanvas"></canvas>
-  <script src="apk.js"></script>
+  <div class="container">
+    <h3>Login</h3>
+    <input type="email" id="logEmail" placeholder="Email">
+    <input type="password" id="logPass" placeholder="Password">
+    <button onclick="loginUser()">Login</button>
+  </div>
 </body>
 </html>
