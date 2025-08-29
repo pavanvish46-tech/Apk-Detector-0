@@ -66,7 +66,7 @@ app.post("/api/login", async (req, res) => {
 
 // Serve main page
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "apk.html")); // keep apk.html in /public
+  res.sendFile(path.join(__dirname, "apk.html")); // keep apk.html in /public
 });
 
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
