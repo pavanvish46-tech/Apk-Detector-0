@@ -7,9 +7,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 
-dotenv.config(); // Load .env variables (for local dev)
+dotenv.config(); // for local dev
 
-// __dirname setup for ES modules
+// __dirname setup (ESM support)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -20,7 +20,7 @@ const SECRET = process.env.JWT_SECRET || "supersecretkey";
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public"))); // public folder for frontend files
+app.use(express.static(path.join(__dirname, "public"))); // serve frontend files
 
 // ✅ MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => console.log("✅ MongoDB Connected Successfully"))
   .catch((err) => {
     console.error("❌ MongoDB Error:", err.message);
-    process.exit(1); // stop app if db not connected
+    process.exit(1);
   });
 
 // ✅ User Schema & Model
@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema({
 });
 const User = mongoose.model("User", UserSchema);
 
-// ✅ Register API
+// ✅ Register
 app.post("/api/register", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -59,7 +59,7 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
-// ✅ Login API
+// ✅ Login
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -80,7 +80,7 @@ app.post("/api/login", async (req, res) => {
 
 // ✅ Root route -> serve apk.html
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "apk.html")); // put apk.html inside /public folder
+  res.sendFile(path.join(__dirname, "public", "apk.html"));
 });
 
 // Start server
